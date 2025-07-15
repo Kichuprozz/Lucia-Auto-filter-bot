@@ -1,3 +1,4 @@
+import os
 import sys
 import glob
 import importlib
@@ -101,6 +102,8 @@ async def SilentXBotz_start():
     await app.setup()
     bind_address = "0.0.0.0"
     await web.TCPSite(app, bind_address, PORT).start()
+    await asyncio.sleep(86400)
+    os.execl(sys.executable, sys.executable, "bot.py") 
     await idle()
     
 if __name__ == '__main__':
