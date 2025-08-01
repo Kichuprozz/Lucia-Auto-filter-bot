@@ -226,9 +226,12 @@ def silent_size(size):
     size_gb = size / (1024 ** 3)
     return "%.2f GB" % size_gb
                         
+
 def extract_tag(file_name: str) -> str:
     file_name = file_name.lower()
     file_name = re.sub(r'[\._\-]+', ' ', file_name)
+
+    # Full Season + Episode patterns
     patterns = [
         r'\b(?:s|season)\s*0*(\d{1,2})\s*(?:e|episode)\s*0*(\d{1,2})\b',
         r'\b(\d{1,2})\s*(?:x|episode)\s*0*(\d{1,2})\b',
@@ -240,13 +243,24 @@ def extract_tag(file_name: str) -> str:
             season = int(match.group(1))
             episode = int(match.group(2))
             return f"S{season:02d}E{episode:02d} •"
+
+    # Only Season
     season_match = re.search(r'\b(?:s|season)\s*0*(\d{1,2})\b', file_name)
     if season_match:
         season = int(season_match.group(1))
         return f"S{season:02d} •"
-    quality_match = re.search(r'\b(2160p|1080p|720p|480p|360p|4k)\b', file_name)
+
+    # ✅ New: Only Episode
+    episode_match = re.search(r'\b(?:e|episode)\s*0*(\d{1,3})\b', file_name)
+    if episode_match:
+        episode = int(episode_match.group(1))
+        return f"E{episode:02d} •"
+
+    # Quality
+    quality_match = re.search(r'\b(2160p|1080p|720p|540p|480p|360p|4k)\b', file_name)
     if quality_match:
         return f"{quality_match.group(1)} •"
+
     return ""
 
 def extract_request_content(message_text):
