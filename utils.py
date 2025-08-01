@@ -222,9 +222,14 @@ def get_size(size):
     return "%.2f %s" % (size, units[i])
 
 def silent_size(size):
+    """
+    Return a human-readable size in MB or GB depending on value.
+    """
     size = float(size)
-    size_gb = size / (1024 ** 3)
-    return "%.2f GB" % size_gb
+    if size >= 1024 ** 3:  # If size is at least 1 GB
+        return "%.2f GB" % (size / (1024 ** 3))
+    else:  # Otherwise, show in MB
+        return "%.2f MB" % (size / (1024 ** 2))
                         
 
 def extract_tag(file_name: str) -> str:
