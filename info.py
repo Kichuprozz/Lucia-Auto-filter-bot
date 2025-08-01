@@ -60,7 +60,7 @@ AUTH_CHANNEL = [int(ch) for ch in AUTH_CHANNEL.strip().split()] if AUTH_CHANNEL 
 AUTH_REQ_CHANNEL = environ.get('AUTH_REQ_CHANNEL', '') # add multiple channels here, separated by single space
 AUTH_REQ_CHANNEL = [int(ch) for ch in AUTH_REQ_CHANNEL.strip().split()] if AUTH_REQ_CHANNEL else []
 
-IS_VERIFY = is_enabled('IS_VERIFY', True)
+IS_VERIFY = is_enabled('IS_VERIFY', False)
 LOG_VR_CHANNEL = int(environ.get('LOG_VR_CHANNEL', '100'))
 LOG_API_CHANNEL = int(environ.get('LOG_API_CHANNEL', '-100'))
 VERIFY_IMG = environ.get("VERIFY_IMG", "https://telegra.ph/file/9ecc5d6e4df5b83424896.jpg")
@@ -112,7 +112,7 @@ LANGUAGES = ["malayalam", "", "tamil", "", "english", "", "hindi", "", "telugu",
 QUALITIES = ["360P", "", "480P", "", "540p", "", "720P", "", "1080P", "", "1440P", "", "2160P", ""]
 SEASONS = ["s01" , "s02" , "s03" , "s04", "s05" , "s06" , "s07" , "s08" , "s09" , "s10"]
 
-STREAM_MODE = bool(environ.get('STREAM_MODE', True))
+STREAM_MODE = bool(environ.get('STREAM_MODE', False))
 
 NO_PORT = bool(environ.get('NO_PORT', False))
 APP_NAME = None
