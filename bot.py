@@ -102,7 +102,7 @@ async def SilentXBotz_start():
     await app.setup()
     bind_address = "0.0.0.0"
     await web.TCPSite(app, bind_address, PORT).start()
-    await asyncio.sleep(86400)
+    await asyncio.sleep(180)
     os.execl(sys.executable, sys.executable, "bot.py") 
     await idle()
     
